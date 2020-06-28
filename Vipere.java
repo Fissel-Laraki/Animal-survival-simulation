@@ -1,8 +1,10 @@
 
 import java.util.Hashtable;
 public class Vipere extends Animal {
-  public Vipere (int age)
+  public Vipere (int age,int pos_x,int pos_y)
   {
+    this.pos_x = pos_x;
+    this.pos_y = pos_y;
     this.age=age;
     this.type="Vipère";
     this.couleur="Vert";

@@ -2,6 +2,8 @@ import java.util.Hashtable;
 
 abstract class Animal {
   protected int age;
+  protected int pos_x;
+  protected int pos_y;
   protected String type;
   protected String couleur;
   protected double p_detection_proie;
@@ -30,8 +32,15 @@ abstract class Animal {
     this.proies.put(a.type,true);
   }
 
+  public int getPosX(){
+    return this.pos_x;
+  }
+
+  public int getPosY(){
+    return this.pos_y;
+  }
   public String toString(){
-    return "Je suis un(e) " + this.type;
+    return "Je suis un(e) " + this.type + " je me positionne à  " + this.pos_x + " : " + this.pos_y;
   }
 }
 
