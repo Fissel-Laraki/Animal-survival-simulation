@@ -1,14 +1,15 @@
 import javax.swing.JFrame;
 import java.util.Random;
 
-
 public class Main 
 {
+  
 	public static void main(String[] args)
 	{
+    /*
 		int posx, posy;
 		//On crée un objet ChampGraphique de 50 cases de large, et 60 de haut
-		ChampGraphique grid = new ChampGraphique(50, 60);
+		ChampGraphique grid = new ChampGraphique(400, 600);
 		
 		Random r = new Random();
 		
@@ -18,8 +19,8 @@ public class Main
 		{
 			//on tire une case au hasard dans la grille
 			posx = r.nextInt(grid.getLargeur());
-			posy = r.nextInt(grid.getHauteur());
-			
+
+      
 			//et on la colorie en rouge
 			grid.colorierCase(posx, posy);
 			
@@ -34,7 +35,14 @@ public class Main
 	        }
 		}
          
+  */
+  Animal[] tab = {new Poule(13),new Renard(10),new Vipere(14)}; 
 
+  for (Animal a : tab){
+    System.out.println(a);
+    a.chasser();
+  }
+  
         
 	}
 }
