@@ -1,5 +1,5 @@
-
 import java.util.Hashtable;
+
 public class Renard extends Animal {
   public Renard (int age, int pos_x, int pos_y)
   {

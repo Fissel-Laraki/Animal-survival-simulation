@@ -1,5 +1,5 @@
-
 import java.util.Hashtable;
+
 public class Vipere extends Animal {
   public Vipere (int age, int pos_x, int pos_y)
   {

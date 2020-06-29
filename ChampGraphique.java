@@ -28,7 +28,7 @@ public class ChampGraphique extends JPanel
 	{
 		this.largeur = largeur;
 		this.hauteur = hauteur;
-		casesAColorier = new ArrayList<>(25);
+		casesAColorier = new ArrayList<Coord>(25);
 
 		JFrame window = new JFrame();
 		window.setSize(largeur*10+50, hauteur*10+50);
