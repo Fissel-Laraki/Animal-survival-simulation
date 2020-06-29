@@ -9,14 +9,13 @@ public class Partie extends ChampGraphique{
   private Hashtable<String,Animal> grille_animaux;
   private int[][] grille;
   
-  public Partie(int nb_tours, int taille_x, int taille_y, List<Animal> animaux)
+  public Partie(int nb_tours, int taille_x, int taille_y)
   {
     super(taille_x,taille_y);
     this.nb_tours = nb_tours;
     grille = new int[taille_x][taille_y];
     grille_animaux = new Hashtable<String,Animal>();
     this.remplir_grille();
-    this.animaux = animaux;
   }
 
   private void remplir_grille(){
@@ -39,7 +38,7 @@ public class Partie extends ChampGraphique{
 	      
         // Executer actions  
         /*On essaye de detecter une proie dans les cases à cotés*/ 
-       	 proie = detecter(a);
+       	 proie = detecter_proie(a);
         /*Si on a bien detecter une proie*/
         if (proie != null){
           if(!(a.manger(proie))){
@@ -49,14 +48,14 @@ public class Partie extends ChampGraphique{
 
         }
 
-        super.colorierCase(a.getColor(),a.getPosX(),a.getPosY());
+        this.colorierCase(a.getColor(),a.getPosX(),a.getPosY());
       }   
     }
   }
 
   private void maj(int x, int y, Animal a){
 	  /*On enleve l'animal mort de la grille*/
-	  this.grille[x][y] = 0;
+	  this.grille[x][y] = 1;
 	  /*On supprime l'animal de la table de hachage*/
 	  this.grille_animaux.remove(x+","+y);
 	  /*On supprime l'animal de la liste chainée*/
@@ -64,6 +63,10 @@ public class Partie extends ChampGraphique{
     
   }
 
+  public void setAnimaux(List<Animal> animaux){
+    this.animaux = animaux;
+  }
+  
   public int getCase(int x, int y)
   {
     return this.grille[x][y];
@@ -79,7 +82,29 @@ public class Partie extends ChampGraphique{
     return this.nb_tours;
   }
 
-  public Animal detecter(Animal ani){
+  public boolean se_reproduire(Animal ani){
+    int a = ani.getPosX()-1 < 0 ? ani.getPosX() : ani.getPosX()-1;
+    int b = ani.getPosY()-1 < 0 ? ani.getPosY() : ani.getPosY()-1;
+    int c = ani.getPosX()+2 > this.getLargeur() ? ani.getPosX()+1 : ani.getPosX()+2;
+    int d = ani.getPosY()+2 > this.getHauteur() ? ani.getPosY()+1 : ani.getPosY()+2;
+
+    Random r = new Random();
+    int hasard = 0;
+
+    for (int i = a ; i < c ; i++){
+      for (int j = b ; j < d ; j++){
+        if ( this.grille[i][j] == 2  ){
+          hasard = r.nextInt(100);
+          if (hasard <= ani.p_reproduction*100 && ani.type.equals(grille_animaux.get(i+','+j).type)){
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  public Animal detecter_proie(Animal ani){
     int a= ani.getPosX()-1 < 0 ? ani.getPosX() : ani.getPosX()-1;
     int b = ani.getPosY()-1 < 0 ? ani.getPosY() : ani.getPosY()-1;
     int c = ani.getPosX()+2 > this.getLargeur() ? ani.getPosX()+1 : ani.getPosX()+2;
@@ -90,15 +115,14 @@ public class Partie extends ChampGraphique{
 
     for (int i = a ; i < c ; i++){
       for (int j=b ; j < d ; j++){
-        if ( this.grille[i][j] == 2  ){ // and is proie of a 
+        if ( this.grille[i][j] == 2 ){
           hasard = r.nextInt(100);
           if (hasard <= ani.p_detection_proie*100){
             return grille_animaux.get(i+','+j);
           }
-        }
+        } 
       }
     }
     return null;
   }
-
 }

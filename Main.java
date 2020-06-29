@@ -29,6 +29,8 @@ public class Main
 	  int x;
 	  int y;
 
+    Partie p = new Partie(100,largeur,hauteur);
+
 	  // On remplit la liste en fonction des nb_<animal> 
 	  for (int i = 0 ; i < nb_poule + nb_vipere + nb_renard ; i++ )
     {
@@ -37,10 +39,10 @@ public class Main
 	    y = r.nextInt(hauteur);
 	      
 	    // Vérifie si une case n'est pas déjà occuppée.
-	    /*while(p.getCase(x,y)==2){
+	    while(p.getCase(x,y)==2){
 		    x = r.nextInt(largeur);
 		    y = r.nextInt(hauteur);
-	    }*/
+	    }
 
 	    if (i < nb_poule)
       {
@@ -54,9 +56,11 @@ public class Main
       {
 		    animaux.add(new Vipere(0,x,y));
       }
+      p.setCase(x,y);
+    }
 
-	    Partie p = new Partie(100,largeur,hauteur, animaux);    
-	   // p.simuler();
-	  }
+	  p.setAnimaux(animaux);
+    p.simuler();
+	  
 	}
 }

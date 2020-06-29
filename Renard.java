@@ -16,6 +16,7 @@ public class Renard extends Animal {
     this.vitesse=3;
     this.endurance_alimentaire=8;
     this.esperance_vie=250;
+    this.etat_mort=false;
     this.proies = new Hashtable();
   }
 }

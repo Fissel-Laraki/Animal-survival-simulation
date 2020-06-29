@@ -1,6 +1,9 @@
 import java.util.Hashtable;
 import java.awt.Color;
 import java.util.Random;
+import java.awt.Point;
+import java.util.LinkedList;
+import java.util.List;
 
 abstract class Animal {
   
@@ -17,6 +20,7 @@ abstract class Animal {
   protected int vitesse;
   protected int endurance_alimentaire;
   protected int esperance_vie;
+  protected boolean etat_mort;
   protected Hashtable<Animal,Boolean> proies;
 
   public boolean manger(Animal proie){
@@ -24,65 +28,33 @@ abstract class Animal {
     boolean attaquer = r.nextInt(this.bonus)+this.ATK > proie.DEF; 
     return attaquer;
   }
-
-  
-
-  public void se_reproduire(){
-    System.out.println("salut");
-  }
  
-  public void se_deplacer(int hauteur, int largeur)
-  {
+  public void se_deplacer(int hauteur, int largeur,int[][] grille){
     Random r = new Random();
-    int nb;
-    int i=0, temp_i;
-    while(i<this.vitesse)
+    Point tmp ; 
+    LinkedList<Point> casesPossibles = new LinkedList<Point>();
+    int x = this.getPosX();
+    int y = this.getPosY();
+    for(int i = 0; i<this.vitesse; i++)
     {
-      temp_i=i;
-      nb = r.nextInt(8);
-      if (nb==0 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
-        this.setPosY(this.getPosY()-1);
-        i++;
-      }
-      else if (nb==1 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
-        this.setPosX(this.getPosX()+1);
-        this.setPosY(this.getPosY()-1);
-        i++;
-      }
-      else if (nb==2 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
-        this.setPosX(this.getPosX()+1);
-        i++;
-      }
-      else if (nb==3 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
-        this.setPosX(this.getPosX()+1);
-        this.setPosY(this.getPosY()+1);
-        i++;
-      }
-      else if (nb==4 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
-        this.setPosY(this.getPosY()+1);
-        i++;
-      }
-      else if (nb==5 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
-        this.setPosX(this.getPosX()-1);
-        this.setPosY(this.getPosY()+1);
-        i++;
-      }
-      else if (nb==6 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
-        this.setPosX(this.getPosX()-1);
-        i++;
-      }
-      else if (nb==7 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
-        this.setPosX(this.getPosX()-1);
-        this.setPosY(this.getPosY()-1);
-        i++;
-      }
-      else
-        System.out.println("Erreur lors du déplacement!");
+      tmp = nextCase(grille,casesPossibles,x,y,hauteur,largeur);
+      x = tmp.x;
+      y = tmp.y;
     } 
+    this.setPosX(x);
+    this.setPosY(y);
   }
   
   public void mourir(){
-    System.out.println("salut");
+    if(this.endurance_alimentaire==0 || this.age==esperance_vie)
+    {
+      this.etat_mort=true;
+      this.type="All";
+      this.p_detection_proie=0;
+      this.vitesse=0;
+      this.p_reproduction=0;
+      this.DEF=-1;
+    } 
   }
  
   public void setProie(Animal a){
@@ -121,6 +93,26 @@ abstract class Animal {
 
   public String toString(){
     return "Je suis un(e) " + this.type + " je me positionne à  " + this.pos_x + " : " + this.pos_y;
+  }
+
+  private Point nextCase(int[][] grille,List<Point> casesPossibles,int x, int y,int hauteur,int largeur){
+    
+    Random r = new Random();
+
+    int a= x-1 < 0 ? x : x-1;
+    int b = y-1 < 0 ? y : y-1;
+    int c = x+2 > largeur ? x+1 : x+2;
+    int d = y+2 > hauteur ? y+1 : y+2;
+
+    for (int i = a ; i < c ; i++){
+      for (int j = b; j < d ; j++){
+        if (grille[i][j] == 1){
+          casesPossibles.add(new Point(i,j));
+        }
+      }
+    }
+
+    return casesPossibles.get(r.nextInt(casesPossibles.size()));
   }
 }
 

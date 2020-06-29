@@ -16,6 +16,7 @@ public class Poule extends Animal {
     this.vitesse=2;
     this.endurance_alimentaire=20;
     this.esperance_vie=150;
+    this.etat_mort=false;
     this.proies = new Hashtable();
   }
 }

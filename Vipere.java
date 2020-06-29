@@ -16,6 +16,7 @@ public class Vipere extends Animal {
     this.vitesse=1;
     this.endurance_alimentaire=35;
     this.esperance_vie=120;
+    this.etat_mort=false;
     this.proies = new Hashtable();
   }
 }
