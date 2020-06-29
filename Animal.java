@@ -30,56 +30,57 @@ abstract class Animal {
   public void se_reproduire(){
     System.out.println("salut");
   }
- /*
-  public void se_deplacer(int hauteur, int largeur){
+ 
+  public void se_deplacer(int hauteur, int largeur)
+  {
     Random r = new Random();
     int nb;
     int i=0, temp_i;
     while(i<this.vitesse)
     {
       temp_i=i;
-      nb = random.nextInt(8);
-      if (nb==0 && this.getPosX<hauteur && this.getPosY<largeur && temp_i==i){
-        this.setPosY(this.getPosY-1);
+      nb = r.nextInt(8);
+      if (nb==0 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
+        this.setPosY(this.getPosY()-1);
         i++;
       }
-      else if (nb==1 && this.getPosX<hauteur && this.getPosY<largeur && temp_i==i){
-        this.setPosX(this.getPosX+1);
-        this.setPosY(this.getPosY-1);
+      else if (nb==1 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
+        this.setPosX(this.getPosX()+1);
+        this.setPosY(this.getPosY()-1);
         i++;
       }
-      else if (nb==2 && this.getPosX<hauteur && this.getPosY<largeur && temp_i==i){
-        this.setPosX(this.getPosX+1);
+      else if (nb==2 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
+        this.setPosX(this.getPosX()+1);
         i++;
       }
-      else if (nb==3 && this.getPosX<hauteur && this.getPosY<largeur && temp_i==i){
-        this.setPosX(this.getPosX+1);
-        this.setPosY(this.getPosY+1);
+      else if (nb==3 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
+        this.setPosX(this.getPosX()+1);
+        this.setPosY(this.getPosY()+1);
         i++;
       }
-      else if (nb==4 && this.getPosX<hauteur && this.getPosY<largeur && temp_i==i){
-        this.setPosY(this.getPosY+1);
+      else if (nb==4 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
+        this.setPosY(this.getPosY()+1);
         i++;
       }
-      else if (nb==5 && this.getPosX<hauteur && this.getPosY<largeur && temp_i==i){
-        this.setPosX(this.getPosX-1);
-        this.setPosY(this.getPosY+1);
+      else if (nb==5 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
+        this.setPosX(this.getPosX()-1);
+        this.setPosY(this.getPosY()+1);
         i++;
       }
-      else if (nb==6 && this.getPosX<hauteur && this.getPosY<largeur && temp_i==i){
-        this.setPosX(this.getPosX-1);
+      else if (nb==6 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
+        this.setPosX(this.getPosX()-1);
         i++;
       }
-      else if (nb==7 && this.getPosX<hauteur && this.getPosY<largeur && temp_i==i){
-        this.setPosX(this.getPosX-1);
-        this.setPosY(this.getPosY-1);
+      else if (nb==7 && this.getPosX()<hauteur && this.getPosY()<largeur && temp_i==i){
+        this.setPosX(this.getPosX()-1);
+        this.setPosY(this.getPosY()-1);
         i++;
       }
       else
         System.out.println("Erreur lors du déplacement!");
     } 
   }
-  */
+  
   public void mourir(){
     System.out.println("salut");
   }
