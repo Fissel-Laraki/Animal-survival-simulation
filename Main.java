@@ -10,7 +10,7 @@ public class Main
 	public static void main(String[] args)
 	{
     // Constantes des nombres d'animaux
-    int nb_poule = 10;
+    int nb_poule = 11;
     int nb_renard = 12;
     int nb_vipere = 13;
 
@@ -29,26 +29,39 @@ public class Main
     int x;
     int y;
 
+    Partie p = new Partie(100,largeur,hauteur);
+    p.remplir_grille();
+    animauxIterator = animaux.listIterator();
+
     // On remplit la liste en fonction des nb_<animal> 
     for (int i = 0 ; i < nb_poule + nb_vipere + nb_renard ; i++ ){
       // On met a jour x et y
       x = r.nextInt(largeur);
       y = r.nextInt(hauteur);
+      // Vérifie si une case n'est pas déjà occuppée.
+      while(p.getCase(x,y)==2){
+        x = r.nextInt(largeur);
+        y = r.nextInt(hauteur);
+      }
 
-      if (i< nb_poule){
+      if (i < nb_poule){
           animaux.add(new Poule(0,x,y));
+          p.setCase(x,y);
       }else if (i-nb_poule < nb_renard){
           animaux.add(new Renard(0,x,y));
+          p.setCase(x,y);
       }else{
           animaux.add(new Vipere(0,x,y));
+          p.setCase(x,y);
       }
     }
-
-    Partie p = new Partie(100,largeur,hauteur);
-    animauxIterator = animaux.listIterator();
+    
     for(Animal a : animaux){
-      p.colorierCase(a.getPosX(),a.getPosY());
+      p.colorierCase(a.getColor(),a.getPosX(),a.getPosY());
     }
+
+
+    
     /*
 		int posx, posy;
 		//On crée un objet ChampGraphique de 50 cases de large, et 60 de haut

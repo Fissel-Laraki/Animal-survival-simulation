@@ -17,7 +17,7 @@ public class ChampGraphique extends JPanel
 {
 	private int largeur, hauteur;
 	
-	private List<Point> casesAColorier;
+	private List<Coord> casesAColorier;
 
 	/**
 	 * Constructeur.
@@ -42,11 +42,12 @@ public class ChampGraphique extends JPanel
 	protected void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
-		for (Point fillCell : casesAColorier) 
+		for (Coord fillCell : casesAColorier) 
 		{
 			int cellX = 10 + (fillCell.x * 10);
 			int cellY = 10 + (fillCell.y * 10);
-			g.setColor(Color.RED);
+
+			g.setColor(fillCell.color);
 			g.fillRect(cellX, cellY, 10, 10);
 		}
 		
@@ -67,9 +68,9 @@ public class ChampGraphique extends JPanel
 	 * @param x Abscisse de la case à colorier (entre 0 et largeur de grille - 1).
 	 * @param y Ordonnée de la case à colorier (entre 0 et hauteur de grille - 1).
 	 */
-	public void colorierCase(int x, int y) 
+	public void colorierCase(Color color, int x, int y) 
 	{
-		casesAColorier.add(new Point(x, y));
+		casesAColorier.add(new Coord(color, x, y));
 		repaint();
 	}
 	

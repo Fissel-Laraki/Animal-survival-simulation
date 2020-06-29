@@ -16,7 +16,23 @@ public class Partie extends ChampGraphique{
         // A modifier pour ne pas remplir tout le tableau (parametre int)
         this.grille[i][j]=1;
   }
-/*
+
+  public int getCase(int x, int y)
+  {
+    return this.grille[x][y];
+  }
+
+  public void setCase(int x, int y)
+  {
+    this.grille[x][y]=2;
+  }
+
+  public int getTours()
+  {
+    return this.nb_tours;
+  }
+
+  /*
   public void ajouter_animaux(int nombre_animaux)
   {
     ArrayList animaux = new ArrayList();
@@ -27,8 +43,4 @@ public class Partie extends ChampGraphique{
     }  
   }
 */
-  public int getTours()
-  {
-    return this.nb_tours;
-  }
 }

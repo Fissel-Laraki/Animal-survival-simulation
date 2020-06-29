@@ -1,4 +1,5 @@
 import java.util.Hashtable;
+import java.awt.Color;
 
 abstract class Animal {
   protected int age;
@@ -39,6 +40,21 @@ abstract class Animal {
   public int getPosY(){
     return this.pos_y;
   }
+  
+  public Color getColor(){
+    switch(this.couleur)
+    {
+      case "Jaune":
+        return Color.YELLOW;
+      case "Orange":
+        return Color.ORANGE;
+      case "Vert":
+        return Color.GREEN;
+      default:
+        return Color.BLACK; 
+    }
+  }
+
   public String toString(){
     return "Je suis un(e) " + this.type + " je me positionne à  " + this.pos_x + " : " + this.pos_y;
   }
