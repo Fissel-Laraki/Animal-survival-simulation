@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
@@ -17,7 +16,7 @@ public class ChampGraphique extends JPanel
 {
 	private int largeur, hauteur;
 	
-	private List<Coord> casesAColorier;
+	protected List<Coord> casesAColorier;
 
 	/**
 	 * Constructeur.
@@ -72,9 +71,9 @@ public class ChampGraphique extends JPanel
 	 * @param x Abscisse de la case à colorier (entre 0 et largeur de grille - 1).
 	 * @param y Ordonnée de la case à colorier (entre 0 et hauteur de grille - 1).
 	 */
-	public void colorierCase(Color color, int x, int y) 
+	public void colorierCase(Coord c) 
 	{
-		casesAColorier.add(new Coord(color, x, y));
+		casesAColorier.add(c);
 		repaint();
 	}
 	

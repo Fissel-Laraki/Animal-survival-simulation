@@ -43,11 +43,17 @@ public class Partie extends ChampGraphique{
         if (proie != null){
           if(!(a.manger(proie))){
 		  // Si il n'a pas mangé la proie il peut alors essayer de se reproduire et la proie doit s'enfuir (se deplacer)
-            maj(proie.getPosX(),proie.getPosY(),proie);
-          }
+		proie.se_deplacer(this.getHauteur(),this.getLargeur(),this.grille);
+          }else{
+	  	maj(proie.getPosX(),proie.getPosY(),proie);
+	  }
 
-        }
-	super.colorierCase(a.getColor(),a.getPosX(),a.getPosY());
+        }else{
+		// Si proie==null, ca veut dire qu'il n'a pas atatqué, il peut alors se deplacer
+		a.se_deplacer(this.getHauteur(),this.getLargeur(),this.grille);
+		
+	}
+	this.ajouterAnimal(a);
 	try{
 		Thread.sleep(500);
 	}catch(InterruptedException e){
@@ -58,6 +64,18 @@ public class Partie extends ChampGraphique{
     }
   }
 
+  private void ajouterAnimal(Animal a){
+	Coord tmp = new Coord(a.getColor(),a.getPosX(),a.getPosY());
+  	if (this.casesAColorier.contains(tmp)){
+		System.out.println("removed");
+		this.casesAColorier.remove(tmp);
+		
+	}
+	super.colorierCase(tmp);
+
+  }
+
+  // Permet de supprimer un animal de la liste
   private void maj(int x, int y, Animal a){
 	  /*On enleve l'animal mort de la grille*/
 	  this.grille[x][y] = 1;

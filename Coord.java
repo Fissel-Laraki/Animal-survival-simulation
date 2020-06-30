@@ -8,4 +8,17 @@ public class Coord extends Point{
     super(pos_x, pos_y);
     this.color = color;
   }  
+
+  public boolean equals(Object o){
+	if ( o == this){
+		return true;
+	}
+	if (!( o instanceof Coord)){
+		return false;
+	}	
+
+	Coord c = (Coord) o;
+	return this.x==c.x && this.y==c.y && this.color == c.color;
+
+  }
 }
