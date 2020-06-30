@@ -28,7 +28,7 @@ public class ChampGraphique extends JPanel
 	{
 		this.largeur = largeur;
 		this.hauteur = hauteur;
-		casesAColorier = new ArrayList<Coord>(25);
+		casesAColorier = new ArrayList<Coord>();
 
 		JFrame window = new JFrame();
 		window.setSize(largeur*10+50, hauteur*10+50);
@@ -40,12 +40,16 @@ public class ChampGraphique extends JPanel
 	@Override
 	//Fonction d'affichage de la grille.
 	protected void paintComponent(Graphics g) 
-	{
+	{	
+		int cellX = 0; 
+		int cellY = 0;
+		
 		super.paintComponent(g);
+
 		for (Coord fillCell : casesAColorier) 
 		{
-			int cellX = 10 + (fillCell.x * 10);
-			int cellY = 10 + (fillCell.y * 10);
+			cellX = 10 + (fillCell.x * 10);
+			cellY = 10 + (fillCell.y * 10);
 
 			g.setColor(fillCell.color);
 			g.fillRect(cellX, cellY, 10, 10);

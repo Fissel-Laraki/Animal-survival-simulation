@@ -32,14 +32,14 @@ public class Partie extends ChampGraphique{
   }
 
   public void simuler(){
-    Animal proie;
+    Animal proie = null;
     while (this.animaux.size() > 0){
       for(Animal a : this.animaux){
 	      
         // Executer actions  
-        /*On essaye de detecter une proie dans les cases à cotés*/ 
-       	 proie = detecter_proie(a);
-        /*Si on a bien detecter une proie*/
+        //On essaye de detecter une proie dans les cases à cotés
+       	proie = detecter_proie(a);
+        //Si on a bien detecter une proie
         if (proie != null){
           if(!(a.manger(proie))){
 		  // Si il n'a pas mangé la proie il peut alors essayer de se reproduire et la proie doit s'enfuir (se deplacer)
@@ -47,8 +47,13 @@ public class Partie extends ChampGraphique{
           }
 
         }
+	super.colorierCase(a.getColor(),a.getPosX(),a.getPosY());
+	try{
+		Thread.sleep(500);
+	}catch(InterruptedException e){
+	       	e.printStackTrace();
+	}
 
-        this.colorierCase(a.getColor(),a.getPosX(),a.getPosY());
       }   
     }
   }
